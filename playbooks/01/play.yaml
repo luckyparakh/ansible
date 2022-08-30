@@ -17,3 +17,12 @@
         content: "{{ centos }}"
         dest: /etc/motd
       when: ansible_distribution == "Redhat"
+    - name: "Motd message for Centos"
+      package:
+        name: tree
+        state: present
+      notify: Tree installed
+  handlers:
+    - name: Tree installed
+      debug:
+        msg: "Tree Installed"
