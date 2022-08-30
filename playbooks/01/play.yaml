@@ -1,0 +1,19 @@
+- # this - is needed as it indicates list of plays
+
+  hosts: client
+
+  vars:
+    centos: "Centos rock\n"
+    ubuntu: "Ubuntu rock\n"
+
+  tasks:
+    - name: "Motd message for Ubuntu"
+      copy:
+        content: {{ ubuntu }}
+        dest: /etc/motd
+      when: "ansible_distribution" == "Ubuntu" # take key from ansible setup module
+    - name: "Motd message for Centos"
+      copy:
+        content: {{ centos }}
+        dest: /etc/motd
+      when: "ansible_distribution" == "Redhat"
