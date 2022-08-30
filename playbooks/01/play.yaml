@@ -11,9 +11,9 @@
       copy:
         content: {{ ubuntu }}
         dest: /etc/motd
-      when: "ansible_distribution" == "Ubuntu" # take key from ansible setup module
+      when: ansible_distribution == "Ubuntu" # take key from ansible setup module
     - name: "Motd message for Centos"
       copy:
         content: {{ centos }}
         dest: /etc/motd
-      when: "ansible_distribution" == "Redhat"
+      when: ansible_distribution == "Redhat"
