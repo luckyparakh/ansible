@@ -1,6 +1,6 @@
 - # this - is needed as it indicates list of plays
 
-  hosts: client
+  hosts: machine
 
   vars:
     centos: "Centos rock\n"
