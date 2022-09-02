@@ -1,0 +1,23 @@
+-
+  name: "Command vs Shell Module"
+  hosts: target01
+  tasks:
+  -
+    name: "Shell"
+    ansible.builtin.shell:
+      cmd: "ls -l *"
+    register: shell_output
+  -
+    name: "Print output of ls"
+    ansible.builtin.debug:
+      var: shell_output.stdout_lines
+  -
+    name: "Cmd"
+    ansible.builtin.command:
+      cmd: "ls"
+      # cmd: "ls -l *" this will fail as command module doesn't create shell on target hence no shell operators are available like pipe, globbing etc
+    register: cmd_output
+  -
+    name: "Print output of ls"
+    ansible.builtin.debug:
+      var: cmd_output.stdout_lines

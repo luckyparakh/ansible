@@ -1,0 +1,28 @@
+-
+  name: "Copy"
+  hosts: target01
+  gather_facts: false
+  tasks:
+    -
+      name: "Copy to a file"
+      ansible.builtin.copy:
+        dest: "test.txt"
+        content: "Dummy data"
+    -
+      name: "Read data"
+      ansible.builtin.command: "cat test.txt"
+-
+  name: "Template"
+  hosts: target02
+  vars:
+    country: "India"
+    filename: "test.txt"
+  tasks:
+    -
+      name: "Copy to a file"
+      ansible.builtin.template:
+        src: "9mytemplate.j2" # takes only templates
+        dest: "{{ filename }}"
+    -
+      name: "Read data"
+      ansible.builtin.command: "cat {{ filename }}"

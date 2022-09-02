@@ -1,0 +1,15 @@
+-
+  name: Running Script
+  gather_facts: true
+  hosts: target01
+  tasks:
+    -
+      name: Shell Script
+      ansible.builtin.script:
+        executable: sh
+        cmd: 15car.sh
+      register: car_output
+    -
+      name: Read output
+      ansible.builtin.debug:
+        msg: "{{ car_output.stdout }}"

@@ -1,0 +1,14 @@
+-
+  name: "ENV"
+  hosts: all
+  environment:
+    eVAR: "global"
+  tasks:
+    -
+      name: "Display Env"
+      ansible.builtin.command: echo $eVAR
+    -
+      name: "Display local ENV"
+      environment:
+        eVAR: "local"
+      ansible.builtin.command: echo $eVAR # for output check with -v option

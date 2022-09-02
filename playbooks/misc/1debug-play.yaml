@@ -1,0 +1,37 @@
+---
+-
+  name: Debug module to display default message
+  hosts: all
+  tasks:
+    - name: Debug module to display default message
+      ansible.builtin.debug:
+-
+  name: Debug module with msg
+  hosts: all
+  tasks:
+    - name: Debug module with msg
+      ansible.builtin.debug:
+        msg: "Debug this"
+-
+  name: Debug module with msg and vars
+  hosts: target01,target02
+  vars:
+    country: India
+  tasks:
+    -
+      name: Debug module with msg
+      ansible.builtin.debug:
+        var: country
+
+-
+  name: Debug module with msg and verbosity
+  hosts: all
+  vars:
+    # --extra-vars="country=Bharat" or --extra-vars='{"country":"bharat"}' at command line to change it
+    country: India
+  tasks:
+    -
+      name: Debug module with msg and verbosity
+      ansible.builtin.debug:
+        msg: "{{ country }} is great!!"
+        verbosity: 2 # to display use -vv at console

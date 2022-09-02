@@ -1,0 +1,23 @@
+-
+  name: "Select Attr"
+  hosts: target01
+  gather_facts: true
+  tasks:
+    -
+      name: "Attr"
+      ansible.builtin.debug:
+        var: ansible_facts.mounts
+    -
+      name: "Filter"
+      ansible.builtin.debug:
+        # Selectattr takes in a list of dictionaries and applies a test to each dictionary.
+        msg: "{{ ansible_facts.mounts | selectattr('mount','match','/etc/hostname')|list}}"
+    -
+      name: "Attr"
+      ansible.builtin.debug:
+        var: ansible_facts.memory_mb
+    -
+      name: "Filter"
+      ansible.builtin.debug:
+        # Selectattr takes in a list of dictionaries and applies a test to each dictionary.
+        msg: "{{ ansible_facts.memory_mb | dict2items |list}}"

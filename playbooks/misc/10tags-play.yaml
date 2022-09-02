@@ -1,0 +1,24 @@
+# How to run
+# ansible-playbook --tags all 10tags-play.yaml
+# ansible-playbook --tags untagged 10tags-play.yaml
+# ansible-playbook --tags tag1 10tags-play.yaml
+# ansible-playbook --tags tag1,tag2 10tags-play.yaml
+-
+  name: "Tags Play"
+  hosts: target01
+  gather_facts: false
+  tasks:
+    -
+      name: "Print tag1"
+      ansible.builtin.debug:
+        msg: "Tag1"
+      tags: tag1
+    -
+      name: "Print tag2"
+      ansible.builtin.debug:
+        msg: "Tag2"
+      tags: tag2
+    -
+      name: "Print untagged"
+      ansible.builtin.debug:
+        msg: "untagged"

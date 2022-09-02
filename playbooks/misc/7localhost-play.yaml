@@ -1,0 +1,12 @@
+-
+  name: "Localhost Example"
+  gather_facts: false
+  hosts: localhost
+  vars:
+    ansible_connection: local # same can be defined in inventory
+    # ansible_python_interpreter: "{{ ansible_playbook_python }}"
+  tasks:
+    -
+      name: "Run on localhost"
+      ansible.builtin.debug:
+        msg: "Hello on localhost"

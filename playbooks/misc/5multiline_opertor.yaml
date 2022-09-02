@@ -1,0 +1,31 @@
+-
+  name: "Multiline Example"
+  hosts: all
+  vars:
+    var1: |
+      this will
+      be Multiline
+    var2: |-
+      this will
+      be Multiline with
+      no \n at end
+    var3: >
+      this will
+      not be Multiline
+    var4: >-
+      this will
+      be not Multiline with
+      no \n at end
+  tasks:
+    - name: "Multiline"
+      ansible.builtin.debug:
+        var: var1
+    - name: "Multiline with no \n"
+      ansible.builtin.debug:
+        msg: "{{ var2.split('\n') }}"
+    - name: "No Multiline"
+      ansible.builtin.debug:
+        var: var3
+    - name: "No Multiline with no \n"
+      ansible.builtin.debug:
+        var: var4

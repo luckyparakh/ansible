@@ -1,0 +1,7 @@
+Create Ubuntu VM
+Install VSCode from Ubuntu Software, Docker
+For proper working of VScode's Ansible plugin, install ansible and ansible-lint (optional) on VM.
+clone ansible repo from Github and open it in VScode
+sudo docker compose up -d
+sudo docker compose exec ansible /bin/bash
+ansible-playbook test-playbook.yaml -i hosts

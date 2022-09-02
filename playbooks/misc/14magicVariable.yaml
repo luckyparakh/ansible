@@ -1,0 +1,16 @@
+-
+  name: Magic Variable
+  gather_facts: true
+  hosts: target01
+  tasks:
+    -
+      name: Print Magic Variable
+      ansible.builtin.debug:
+        var: "{{ item }}"
+      loop:
+        - inventory_hostname
+        - playbook_dir
+        - inventory_dir
+        - inventory_file
+        - ansible_check_mode
+        - ansible_diff_mode
