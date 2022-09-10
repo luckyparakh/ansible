@@ -1,0 +1,16 @@
+-
+  name: Register and Set fact
+  hosts: target01
+  tasks:
+    -
+      name: Bash Version
+      changed_when: false
+      ansible.builtin.command: 'bash --version'
+      register: bash_op
+    -
+      name: Set Fact
+      ansible.builtin.set_fact:
+        bash_ver: '{{ bash_op.stdout_lines[0].split()[3] }}'
+    - name: Print bash_ver
+      ansible.builtin.debug:
+        var: bash_ver

@@ -1,0 +1,28 @@
+-
+  name: Ignore Error
+  hosts: target01
+  gather_facts: false
+  tasks:
+    -
+      name: List home
+      ansible.builtin.command: "ls /homee"
+      register: home_out
+      ignore_errors: true # Error will be ignored and execution will continue
+    -
+      name: Display
+      ansible.builtin.debug:
+        var: home_out.stdout_lines
+    -
+      name: List tmp
+      ansible.builtin.command: "ls /tmp"
+      register: tmp_out
+    -
+      name: Display
+      ansible.builtin.debug:
+        var: tmp_out.stdout_lines
+    -
+      name: Start Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+      ignore_errors: true

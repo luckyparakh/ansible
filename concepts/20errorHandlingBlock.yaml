@@ -1,0 +1,27 @@
+-
+  name: Block Rescue Finally
+  hosts: target01
+  gather_facts: false
+  tasks:
+    - block:
+      - name: List homee
+        ansible.builtin.command: "ls /homee"
+      rescue:
+        - name: Rescue homee
+          ansible.builtin.debug:
+            msg: "Failed to find path"
+      always:
+        - name: Finally homee
+          ansible.builtin.debug:
+            msg: "Will always run"
+    - block:
+      - name: List tmp
+        ansible.builtin.command: "ls /tmp"
+      rescue:
+        - name: Rescue tmp
+          ansible.builtin.debug:
+            msg: "Failed to find path"
+      always:
+        - name: Finally tmp
+          ansible.builtin.debug:
+            msg: "Will always run"

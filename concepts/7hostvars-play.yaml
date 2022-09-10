@@ -1,0 +1,12 @@
+-
+  name: Hostvars
+  hosts: target01
+  tasks:
+    -
+      name: Display hosts
+      ansible.builtin.debug:
+        var: hostvars
+    -
+      name: Display hosts of only inventory_hostname
+      ansible.builtin.debug:
+        var: hostvars[inventory_hostname]

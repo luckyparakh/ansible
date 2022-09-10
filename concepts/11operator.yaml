@@ -1,0 +1,32 @@
+-
+ name: Operator
+ hosts: target01
+ gather_facts: false
+ vars:
+  x: [6, 10, 15]
+  y: 10
+  name: ansible
+  path: '/var/data/concepts'
+ tasks:
+  -
+    name: Operator
+    ansible.builtin.debug:
+      msg:
+        - "Value of x is {{ x }} and value of y is {{ y }}"
+        - "y in x: {{ y in x }}"
+        - "20 not in x: {{ 20 not in x }}"
+        - "x is defined: {{ x is defined }}"
+        - "z is undefined: {{ z is undefined }}"
+        - "Value of name is {{ name }}"
+        - "name is lower: {{ name is lower }}"
+        - "name is upper: {{ name is upper }}"
+        - "name is str: {{ name is string }}"
+        - "y is number: {{ y is number }}"
+        - "y is odd: {{ y is odd }}"
+        - "y is even: {{ y is even }}"
+        - "y is divisible by 7: {{ y is divisibleby 7 }}"
+        - "Value of path is: {{ path }}"
+        - "path is directory: {{ path is directory }}"
+        - "path is file: {{ path is file }}"
+        - "path exists: {{ path is exists }}"
+        - "path is link: {{ path is link }}"

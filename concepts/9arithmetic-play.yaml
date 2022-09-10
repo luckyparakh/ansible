@@ -1,0 +1,32 @@
+-
+  name: Arithmetic
+  hosts: localhost
+  gather_facts: false
+  vars_prompt:
+    -
+      name: x
+      prompt: Enter x
+      private: false
+    -
+      name: y
+      prompt: Enter y
+      private: false
+  tasks:
+    -
+      name: Arithmetic
+      ansible.builtin.debug:
+        msg:
+          - "{{ x }} + {{ y }}={{ x + y }}" # prompt always give string type
+          - "{{ x }} + {{ y }}={{ x | int + y |int }}"
+-
+  name: Arithmetic read from file
+  hosts: localhost
+  gather_facts: false
+  vars_files:
+    - 6vars.yaml
+  tasks:
+    -
+      name: Arithmetic
+      ansible.builtin.debug:
+        msg:
+          - "{{ z.zz }} + {{ y }}={{ z.zz + y }}"

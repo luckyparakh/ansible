@@ -1,0 +1,32 @@
+-
+  name: Install without loop
+  hosts: target01
+  tasks:
+    -
+      name: Install
+      ansible.builtin.yum:
+        name: gettext-devel
+        state: present
+    -
+      name: Install
+      ansible.builtin.yum:
+        name: openssl-devel
+        state: present
+    -
+      name: Install
+      ansible.builtin.yum:
+        name: perl-devel
+        state: present
+-
+  name: Uninstall with loop
+  hosts: target01
+  tasks:
+    -
+      name: Uninstall
+      ansible.builtin.yum:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - gettext-devel
+        - openssl-devel
+        - perl-devel

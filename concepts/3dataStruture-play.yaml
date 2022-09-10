@@ -1,0 +1,40 @@
+-
+  name: DS
+  hosts: target01
+  vars:
+    pkgs: ['httpd', 'vim', 'nano']
+    # or
+    # pkgs:
+    #   - httpd
+    #   - vim
+    #   - nano
+    os: {'Linux':'httpd', 'ubuntu':'apache2'}
+    # or
+    # os:
+    #   'Linux':'httpd'
+    #   'ubuntu':'apache2'
+  tasks:
+    -
+      name: Display list
+      ansible.builtin.debug:
+        var: pkgs
+    -
+      name: Display list's 1st element
+      ansible.builtin.debug:
+        var: pkgs[0]
+    -
+      name: Display dict
+      ansible.builtin.debug:
+        var: os
+    -
+      name: Display dict keys
+      ansible.builtin.debug:
+        var: os.keys()
+    -
+      name: Display dict values
+      ansible.builtin.debug:
+        var: os['Linux']
+    -
+      name: Display dict values
+      ansible.builtin.debug:
+        var: os.get('ubuntu')

@@ -1,0 +1,17 @@
+-
+  name: Inline Comparison Operator
+  hosts: target01
+  gather_facts: false
+  vars:
+    x: 6
+    y: 10
+    larger: "{{ x if x > y else y }}"
+  tasks:
+    -
+      name: Inline Comparison Operator
+      ansible.builtin.debug:
+        msg: Larger of {{ x }} and {{ y }} is {{ x if x > y else y }}
+    -
+      name: Inline Comparison Operator with vars
+      ansible.builtin.debug:
+        msg: Larger of {{ x }} and {{ y }} is {{ larger }}

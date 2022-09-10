@@ -1,0 +1,32 @@
+-
+  name: Delegate and Run Once
+  hosts: target
+  tasks:
+    - 
+      name: Uptime
+      ansible.builtin.command: "uptime"
+      register: uptime_out
+    -
+      name: Display Discovery
+      ansible.builtin.debug:
+        msg: " {{ inventory_hostname }}, {{ ansible_os_family }}, {{ ansible_system }}, {{ ansible_distribution }}, {{ uptime_out.stdout.split(',')[0].split('up')[1] }}"
+    -
+      name: Delete existing CSV file
+      ansible.builtin.file:
+        name: ./22Discovery.csv
+        state: absent
+      delegate_to: localhost # it means to run this task only on this localhost
+      run_once: true # run this once even there are multiple target hosts
+    -
+      name: Create CSV file
+      ansible.builtin.copy:
+        dest: ./22Discovery.csv
+        content: 'Hostname, OS Family, OS, Distribution, Uptime'
+      delegate_to: localhost # it means to run this task only on this localhost
+      run_once: true # run this once even there are multiple target hosts
+    -
+      name: Add content to csv
+      ansible.builtin.lineinfile:
+        path: ./22Discovery.csv
+        line: " {{ inventory_hostname }}, {{ ansible_os_family }}, {{ ansible_system }}, {{ ansible_distribution }}, {{ uptime_out.stdout.split(',')[0].split('up')[1] }}"
+      delegate_to: localhost

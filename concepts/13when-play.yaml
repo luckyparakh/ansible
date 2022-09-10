@@ -1,0 +1,26 @@
+-
+  name: When
+  hosts: target
+  vars:
+    x: 2
+    y: 3
+  tasks:
+    -
+      name: When
+      ansible.builtin.debug:
+        msg: Print x {{ x }} and y {{ y }}
+      when: x==y
+    -
+      name: Install httpd
+      ansible.builtin.yum:
+        name:
+          - httpd
+        state: present
+      when: ansible_distribution == "CentOS"
+    -
+      name: Install Apache2
+      ansible.builtin.apt:
+        name:
+          - apache2
+        state: present
+      when: ansible_distribution == "Ubuntu"

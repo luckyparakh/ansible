@@ -14,5 +14,7 @@ services:
     tty: true
   target02:
     container_name: target02
-    build: ./lab/target
+    build:
+      context: ./lab/target
+      dockerfile: DockerfileUbuntu
     tty: true

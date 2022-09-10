@@ -1,0 +1,24 @@
+FROM ubuntu:20.04
+
+# Install OpenSSh server and client
+RUN apt-get update && apt-get install -y openssh-server openssh-client
+
+# Not needed as for Ubuntu these are pre created
+# RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
+# RUN ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa
+
+# Allow login as root
+RUN sed -i 's/^#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+# RUN sed -ri 's/^#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/sshd_config
+
+# Specify root password
+# Can't use empty password else following error comes (Solution update PAM policy)
+# chpasswd: (user root) pam_chauthtok() failed, error:
+# Authentication token manipulation error
+RUN echo "root:root" | chpasswd
+
+RUN service ssh start
+
+EXPOSE 22
+
+CMD ["/usr/sbin/sshd", "-D"]

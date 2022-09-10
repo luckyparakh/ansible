@@ -1,0 +1,29 @@
+-
+  name: Handler
+  hosts: target01
+  tasks:
+    -
+      name: Install httpd
+      ansible.builtin.yum:
+        name: httpd
+        state: present
+      notify: start http
+    # # Logically following handler do in background
+    # -
+    #   name: Install httpd
+    #   ansible.builtin.yum:
+    #     name: httpd
+    #     state: present
+    #   register: out
+    # -
+    #   name: Start httpd
+    #   ansible.builtin.service:
+    #     name: httpd
+    #     state: started
+    #   when: out.changed
+  handlers:
+    -
+      name: start http
+      ansible.builtin.service:
+        name: httpd
+        state: started

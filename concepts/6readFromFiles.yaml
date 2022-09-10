@@ -1,0 +1,16 @@
+-
+  name: Read vars from Files
+  hosts: target01
+  vars_files:
+    - 6vars.yaml
+    - 6vars.json
+  tasks:
+    -
+      name: Read vars from Yaml File
+      ansible.builtin.debug:
+        msg:
+          - "This is from yaml {{ z }}"
+    -
+      name: Read vars from Json File
+      ansible.builtin.debug:
+        var: b

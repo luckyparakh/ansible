@@ -1,0 +1,18 @@
+-
+  name: Arithmetic
+  hosts: localhost
+  vars:
+    x: 30
+    y: 40
+  tasks:
+    -
+      name: Arithmetic
+      ansible.builtin.debug:
+        msg:
+          - "This is value of x {{ x }}"
+          - "This is value of y {{ y }}"
+          - "{{ x }} + {{ y }}={{ x + y }}"
+          - "{{ x }} - {{ y }}={{ x - y }}"
+          - "{{ x }} * {{ y }}={{ x * y }}"
+          - "{{ x }} / {{ y }}={{ x / y }}"
+          - "{{ x }} % {{ y }}={{ x % y }}"

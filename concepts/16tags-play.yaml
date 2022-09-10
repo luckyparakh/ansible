@@ -1,0 +1,36 @@
+# ansible-playbook 16tags-play.yaml --tags first,fourth
+# ansible-playbook 16tags-play.yaml --skip-tags common
+# ansible-playbook 16tags-play.yaml --list-tags
+-
+  name: Tags
+  hosts: target01
+  gather_facts: false
+  tasks:
+    -
+      name: First task
+      ansible.builtin.debug:
+        msg: First Task
+      tags:
+        - first
+        - common
+        # if this tag is present than this task will not run implicitly, until called by --tags
+        # also will not be listed with --list-tags option
+        - never
+    -
+      name: Second task
+      ansible.builtin.debug:
+        msg: Second Task
+      tags:
+        - second
+        # if this tag is present than this task will implicitly even no --tags was provided
+        - always
+    -
+      name: Thrid task
+      ansible.builtin.debug:
+        msg: Thrid Task
+      tags: thrid, never
+    -
+      name: Fourth task
+      ansible.builtin.debug:
+        msg: Fourth Task
+      tags: fourth, common, never

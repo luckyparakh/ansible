@@ -1,0 +1,37 @@
+-
+  name: Install Httpd
+  hosts: target02
+  vars:
+    server_port: 80
+    x: 100
+    y: 20
+    z: ["yum", "curl", "service"]
+  tasks:
+    -
+      name: Install Apache2
+      ansible.builtin.apt:
+        name:
+          - apache2
+          - curl # needed to open index.html
+        state: present
+    -
+      name: Change Index.html
+      ansible.builtin.template:
+        src: ./23index.html.j2
+        dest: /var/www/html/index.html
+    -
+      name: Start service
+      ansible.builtin.service:
+        name: "apache2"
+        state: started
+    -
+      name: Curl localhost
+      ansible.builtin.uri:
+        url: "http://localhost:80"
+        return_content: true # check content field in output
+      register: out
+    -
+      name: Display content
+      ansible.builtin.debug:
+        var: out.content.splitlines()
+

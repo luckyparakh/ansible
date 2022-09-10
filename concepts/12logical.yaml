@@ -1,0 +1,17 @@
+-
+ name: Comparison Operator
+ hosts: target01
+ gather_facts: false
+ vars:
+  x: 6
+  y: 10
+  z: 20
+ tasks:
+  -
+    name: And Or not
+    ansible.builtin.debug:
+      msg:
+        - "Value of x is {{ x }} and y is {{ y }}"
+        - "x>y and y<z: {{ x>y and y<z }}"
+        - "x>y or y<z: {{ x>y or y<z }}"
+        - "not x > y: {{not x>y }}"

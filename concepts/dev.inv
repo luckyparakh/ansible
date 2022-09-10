@@ -1,0 +1,6 @@
+localhost ansible_connection=local
+target01
+target02 ansible_ssh_pass=root
+[target]
+target01
+target02 

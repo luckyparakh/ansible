@@ -1,0 +1,17 @@
+-
+  name: Comparison Operator
+  hosts: target01
+  gather_facts: false
+  vars:
+    x: 6
+    y: 10
+  tasks:
+    -
+      name: Comparison Operator
+      ansible.builtin.debug:
+        msg:
+          - "Value of x is {{ x }} and y is {{ y }}"
+          - "x==y is {{ x==y }}"
+          - "x!=y is {{ x!=y }}"
+          - "x>=y is {{ x>=y }}"
+          - "x<=y is {{ x<=y }}"

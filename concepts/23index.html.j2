@@ -1,0 +1,16 @@
+This is my IP {{ inventory_hostname }}
+Server runs on port {{ server_port }}
+
+{% if ansible_os_family == "Debian" %}
+OS Family is Debian
+{% endif %}
+
+{% if x < y %}
+X is less than Y
+{% else %}
+X is greater than Y
+{% endif %}
+
+{% for each in z %}
+Package name is {{ each }}
+{% endfor %}

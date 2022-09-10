@@ -1,0 +1,24 @@
+-
+  name: "Block Module"
+  hosts: target01
+  gather_facts: true
+  vars:
+    file: /etc/hosts
+  tasks:
+    -
+      name: "Verify Before"
+      # https://www.reddit.com/r/ansible/comments/u2yszo/how_to_resolve_lint_commands_should_not_change/
+      changed_when: false
+      ansible.builtin.command: "cat {{ file }}"
+    -
+      name: "Update Hosts"
+      ansible.builtin.blockinfile:
+        path: "{{ file }}"
+        state: present
+        content: |
+          12.12.12.12 demo
+          24.24.24.24 dummy
+    -
+      name: "Verify After"
+      changed_when: false
+      ansible.builtin.command: "cat {{ file }}"

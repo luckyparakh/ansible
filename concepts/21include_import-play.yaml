@@ -1,0 +1,17 @@
+-
+  name: Simple Play
+  hosts: target
+  tasks:
+    -
+      name: Install apache2 on Ubuntu
+      # include is dynamic; include are read during run time
+      ansible.builtin.include_tasks:
+        file: 21install_webserver_task_{{ ansible_os_family }}.yaml
+    -
+      name: Start apache2 on Ubuntu
+      # import is static; import is read by ansible while parsing yaml
+      # When using static imports, ensure that any variables used in their names are defined in vars/vars_files or extra-vars passed in from the command line.
+      ansible.builtin.import_tasks:
+        # file: 21check_apache_task_{{ ansible_os_family }}.yaml
+        file: 21check_apache_task_Debian.yaml
+      when: ansible_os_family == "Debian"

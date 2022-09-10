@@ -1,6 +1,7 @@
-FROM centos:7
+# Don't use centos 8
+FROM centos:7 
 
-# Install OpenSSh server with yum
+# Install OpenSSh server and client with yum
 RUN yum -y install openssh-server openssh-clients
 
 # Created because public key is required when starting sshd

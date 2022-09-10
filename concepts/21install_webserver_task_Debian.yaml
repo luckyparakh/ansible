@@ -1,0 +1,6 @@
+- 
+  name: Install apache2 on Ubuntu
+  ansible.builtin.apt:
+    name:
+      - apache2
+    state: present

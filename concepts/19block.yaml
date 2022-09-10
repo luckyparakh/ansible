@@ -1,0 +1,34 @@
+-
+  name: Block
+  hosts: target
+  tasks:
+    - block: # Can be used to apply some common setting to list of tasks
+        -
+          name: List home
+          ansible.builtin.command: "ls /homee"
+          register: home_out
+        -
+          name: List tmp
+          ansible.builtin.command: "ls /tmp"
+          register: tmp_out
+      ignore_errors: true
+    -
+      name: home out
+      ansible.builtin.debug: var=home_out
+      when: home_out.rc==0
+    - ansible.builtin.debug: var=tmp_out
+      name: tmp out
+    # - ansible.builtin.debug: var=ansible_os_family
+    - block:
+      -
+        name: Install apache2 on Ubuntu
+        ansible.builtin.apt:
+          name:
+            - apache2
+          state: present
+      -
+        name: Start apache2 on Ubuntu
+        ansible.builtin.service:
+          name: apache2
+          state: started
+      when: ansible_os_family == "Debian"
